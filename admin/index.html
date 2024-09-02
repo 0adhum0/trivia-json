@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Admin - Add Questions</title>
+		<link rel="stylesheet" href="css/admin-style.css" />
+	</head>
+	<body>
+		<div id="admin-container">
+			<h1>Add New Question</h1>
+			<form id="question-form">
+				<div>
+					<label for="question">Question:</label>
+					<input type="text" id="question" name="question" required />
+				</div>
+				<div>
+					<label for="options">Options (comma-separated):</label>
+					<input type="text" id="options" name="options" required />
+				</div>
+				<div>
+					<label for="answer">Correct Answer (index):</label>
+					<input type="number" id="answer" name="answer" required />
+				</div>
+				<div>
+					<label for="region">Region:</label>
+					<input type="text" id="region" name="region" required />
+				</div>
+				<button type="submit">Add Question</button>
+			</form>
+			<div id="message"></div>
+		</div>
+		<script src="js/admin-script.js"></script>
+	</body>
+</html>
