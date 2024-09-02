@@ -3,35 +3,21 @@ document
 	.addEventListener("submit", function (e) {
 		e.preventDefault();
 
-		const question = document.getElementById("question").value;
-		const options = document.getElementById("options").value.split(",");
-		const answer = parseInt(document.getElementById("answer").value);
-		const region = document.getElementById("region").value;
+		const formData = new FormData(document.getElementById("question-form"));
 
-		const newQuestion = {
-			question: question,
-			options: options,
-			answer: answer,
-			region: region,
-		};
-
-		// Fetch existing questions
-		fetch("../data/questions.json")
+		fetch("add_question.php", {
+			method: "POST",
+			body: formData,
+		})
 			.then((response) => response.json())
 			.then((data) => {
-				data.push(newQuestion);
-
-				// Save the updated questions list
-				fetch("../data/questions.json", {
-					method: "PUT",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(data),
-				}).then(() => {
-					document.getElementById("message").textContent =
-						"Question added successfully!";
+				document.getElementById("message").textContent = data.message;
+				if (data.status === "success") {
 					document.getElementById("question-form").reset();
-				});
+				}
+			})
+			.catch((error) => {
+				document.getElementById("message").textContent =
+					"An error occurred: " + error;
 			});
 	});
